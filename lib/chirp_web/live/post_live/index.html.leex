@@ -13,8 +13,9 @@
   <thead>
     <tr>
       <th>Username</th>
+      <th>Body</th>
       <th>Likes count</th>
-      <th>Repost count</th>
+      <th>Reposts count</th>
 
       <th></th>
     </tr>
@@ -23,8 +24,9 @@
     <%= for post <- @posts do %>
       <tr id="post-<%= post.id %>">
         <td><%= post.username %></td>
+        <td><%= post.body %></td>
         <td><%= post.likes_count %></td>
-        <td><%= post.repost_count %></td>
+        <td><%= post.reposts_count %></td>
 
         <td>
           <span><%= live_redirect "Show", to: Routes.post_show_path(@socket, :show, post) %></span>

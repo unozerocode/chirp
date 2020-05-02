@@ -5,9 +5,9 @@ defmodule ChirpWeb.PostLiveTest do
 
   alias Chirp.Timeline
 
-  @create_attrs %{likes_count: 42, repost_count: 42, username: "some username"}
-  @update_attrs %{likes_count: 43, repost_count: 43, username: "some updated username"}
-  @invalid_attrs %{likes_count: nil, repost_count: nil, username: nil}
+  @create_attrs %{body: "some body", likes_count: 42, reposts_count: 42, username: "some username"}
+  @update_attrs %{body: "some updated body", likes_count: 43, reposts_count: 43, username: "some updated username"}
+  @invalid_attrs %{body: nil, likes_count: nil, reposts_count: nil, username: nil}
 
   defp fixture(:post) do
     {:ok, post} = Timeline.create_post(@create_attrs)
@@ -26,7 +26,7 @@ defmodule ChirpWeb.PostLiveTest do
       {:ok, _index_live, html} = live(conn, Routes.post_index_path(conn, :index))
 
       assert html =~ "Listing Posts"
-      assert html =~ post.username
+      assert html =~ post.body
     end
 
     test "saves new post", %{conn: conn} do
@@ -48,7 +48,7 @@ defmodule ChirpWeb.PostLiveTest do
         |> follow_redirect(conn, Routes.post_index_path(conn, :index))
 
       assert html =~ "Post created successfully"
-      assert html =~ "some username"
+      assert html =~ "some body"
     end
 
     test "updates post in listing", %{conn: conn, post: post} do
@@ -70,7 +70,7 @@ defmodule ChirpWeb.PostLiveTest do
         |> follow_redirect(conn, Routes.post_index_path(conn, :index))
 
       assert html =~ "Post updated successfully"
-      assert html =~ "some updated username"
+      assert html =~ "some updated body"
     end
 
     test "deletes post in listing", %{conn: conn, post: post} do
@@ -88,7 +88,7 @@ defmodule ChirpWeb.PostLiveTest do
       {:ok, _show_live, html} = live(conn, Routes.post_show_path(conn, :show, post))
 
       assert html =~ "Show Post"
-      assert html =~ post.username
+      assert html =~ post.body
     end
 
     test "updates post within modal", %{conn: conn, post: post} do
@@ -110,7 +110,7 @@ defmodule ChirpWeb.PostLiveTest do
         |> follow_redirect(conn, Routes.post_show_path(conn, :show, post))
 
       assert html =~ "Post updated successfully"
-      assert html =~ "some updated username"
+      assert html =~ "some updated body"
     end
   end
 end
