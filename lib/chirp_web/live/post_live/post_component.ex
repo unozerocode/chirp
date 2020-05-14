@@ -4,7 +4,7 @@ defmodule ChirpWeb.PostLive.PostComponent do
   def render(assigns) do
     ~L"""
       <div id="post-<%= @post.id %>" class="post" style="border:1px solid gray;border-radius: 4px; padding: 1rem; margin: 1rem;">
-        <div class="row ">
+        <div class="row">
           <div class="column column-10">
             <div class="post-avatar">
 
